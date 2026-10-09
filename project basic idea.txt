@@ -1,0 +1,65 @@
+# HeatSafe India — Complete Project Brief (Pune Edition)
+
+Hyperlocal Heat-Health Risk Intelligence Platform
+A web app that estimates which neighbourhoods in Pune face greater heat-health risk, explains why, and helps decision-makers prioritize preventive action.
+
+## 1. Problem Statement
+Traditional weather forecasts give a single citywide temperature for Pune (e.g. Shivajinagar weather station), but heat-health risk varies sharply across wards:
+- Humidity affects evaporative cooling and wet-bulb risk.
+- High surface heat from asphalt and dense concrete roofs amplifies urban heat island (UHI) effects.
+- Tree canopy and shade vary drastically (e.g., Koregaon Park vs. Old Peths).
+- Socio-economic vulnerability (slums, outdoor informal workers, dense senior populations) determines resilience.
+- Air pollution (particulate matter / ozone in industrial/traffic corridors) compounds thermal distress.
+
+Goal: Transition from uniform city alerts to ward-level, explainable, actionable heat-health intelligence for Pune Municipal Corporation (PMC) and public health planners.
+
+## 2. Core Functional Requirements
+1. **Interactive Ward Heat-Risk Map (Pune)**:
+   - Centered on Pune, Maharashtra (18.5204° N, 73.8567° E).
+   - Six distinct ward zones with polygon boundaries & risk color coding (Low, Moderate, High, Very High).
+   - Tooltips, click-to-inspect, and visual risk indicators.
+
+2. **Hyperlocal Risk Engine**:
+   - Formula: R = 0.30*T + 0.20*H + 0.20*S + 0.20*V + 0.10*A
+   - T: Temperature-related heat score (30%)
+   - H: Humidity-related heat stress / heat index (20%)
+   - S: Surface heat / impervious surface factor (20%)
+   - V: Socio-economic & demographic vulnerability (20%)
+   - A: Air quality index / particulate burden (10%)
+   - Tiers: Low (0-24, Green), Moderate (25-49, Yellow), High (50-74, Orange), Very High (75-100, Red).
+
+3. **Explainable Ward Intelligence Panel**:
+   - Clean Civic Light Theme UI (municipal dashboard aesthetic).
+   - Ward score badge, risk category, and plain-language driver breakdown (e.g., "Driven by 88% concrete density and low canopy in historical core").
+   - Comparative factor breakdown (radar / bar chart).
+
+4. **Targeted Prevention Playbooks**:
+   - Context-sensitive actions per ward: Cool roofs, drinking water kiosks, emergency cooling shelters, adjusted outdoor work shifts, greening corridors.
+
+5. **Interactive What-If Scenario Simulator**:
+   - Switchable / toggleable interventions:
+     1. Cool Roofs & Reflective Surface Painting (% coverage slider)
+     2. Urban Tree Canopy & Shade Cover (% increase slider)
+     3. Combined intervention mode
+   - Real-time recalculation showing the reduced risk score, prevented risk tier shift, and temperature reduction estimate.
+
+6. **Live Weather Integration (Open-Meteo)**:
+   - Toggle between Live Pune Current Weather (Open-Meteo API) and Simulated Peak Summer Heatwave Scenario (42°C+ peak May baseline).
+
+## 3. Pune Ward Profiles (Prototype)
+1. **Kasba Peth & Historical Core**:
+   - Ultra-dense old city, high surface heat, narrow street canyons, minimal canopy, high vulnerable resident density. Risk: Very High.
+2. **Hadapsar & Magarpatta Outskirts**:
+   - Industrial edge & commercial sprawl, heavy vehicular corridors, elevated air pollution, concrete surfaces. Risk: High.
+3. **Shivajinagar**:
+   - Central civic & transit hub, high daytime heat, moderate tree buffer (COEP, Agricultural college proximity). Risk: Moderate.
+4. **Kothrud**:
+   - Western residential valley, established residential colonies, moderate hill breezes, medium vulnerability. Risk: Moderate.
+5. **Viman Nagar / Kharadi**:
+   - Modern IT corridor, glass & concrete heat retention, newer parks, lower demographic vulnerability. Risk: Moderate.
+6. **Koregaon Park**:
+   - High mature banyan tree canopy, lower building density, river proximity, high socioeconomic resilience. Risk: Low.
+
+## 4. UI/UX Specifications
+- **Theme**: Clean Civic Light Theme (White, slate gray, subtle borders, high-clarity typography, municipal badge accents).
+- **Layout**: Top civic header with quick Pune city summary; Left 60% interactive Leaflet ward map; Right 40% ward detail dossier, factor breakdown chart, playbook, and interactive What-If simulator.
