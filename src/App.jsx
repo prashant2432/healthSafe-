@@ -19,7 +19,8 @@ import {
 } from './services/weatherService';
 
 export default function App() {
-  const [selectedWardId, setSelectedWardId] = useState(null); // null = all wards visible equally
+  const [selectedWardId, setSelectedWardId] = useState('kasba-peth'); // Default to Kasba Peth so ward stats are immediately visible
+  const [telemetryScope, setTelemetryScope] = useState('ward'); // 'ward' (track active ward) or 'city' (pune average)
   const [mapViewMode, setMapViewMode] = useState('graphic'); // 'graphic' (default, no API needed) or 'geo'
   const [isLiveWeather, setIsLiveWeather] = useState(true);
   const [weatherData, setWeatherData] = useState(PEAK_HEATWAVE_SCENARIO);
@@ -49,16 +50,27 @@ export default function App() {
     return () => { isMounted = false; };
   }, [isLiveWeather]);
 
-  // Compute live scores for all wards based on atmospheric conditions
+  // Compute live scores and realistic localized microclimates for all wards
   const enrichedWards = useMemo(() => {
     const baseTempScore = normalizeTemperatureToScore(weatherData.temperatureC);
     const baseHumScore = normalizeHumidityToScore(weatherData.relativeHumidityPct, weatherData.temperatureC);
 
     return PUNE_WARDS.map(ward => {
-      // Adjust atmospheric factors slightly based on ward microclimate characteristics
-      // (High canopy wards are buffered, dense concrete wards have higher localized micro-temperature)
-      const microTempDelta = (ward.imperviousPct - 50) * 0.15 - (ward.treeCanopyPct * 0.2);
-      const adjustedTempScore = Math.max(10, Math.min(100, Math.round(baseTempScore + microTempDelta)));
+      // Localized Urban Heat Island (UHI) temperature offset based on concrete density vs tree canopy
+      // Kasba Peth (+2.2°C), Hadapsar (+1.6°C), Shivajinagar (+0.2°C), Kothrud (-0.8°C), Viman (+0.6°C), Koregaon (-2.6°C)
+      const uhiTempDeltaC = Math.round((((ward.imperviousPct - 58) * 0.07) - ((ward.treeCanopyPct - 15) * 0.09)) * 10) / 10;
+      const wardAmbientTempC = Math.round((weatherData.temperatureC + uhiTempDeltaC) * 10) / 10;
+
+      // Localized humidity offset (canopy adds localized evapotranspiration, concrete drops RH)
+      const uhiHumDelta = Math.round((ward.treeCanopyPct * 0.15) - ((ward.imperviousPct - 50) * 0.05));
+      const wardHumidityPct = Math.max(15, Math.min(95, Math.round(weatherData.relativeHumidityPct + uhiHumDelta)));
+
+      // Localized Heat Index (apparent temperature) in °C
+      const wardHeatIndexC = Math.round((wardAmbientTempC + (wardHumidityPct / 100) * (wardAmbientTempC * 0.28) - 1.2) * 10) / 10;
+
+      // Factor calculations for the risk engine
+      const microTempDeltaScore = (ward.imperviousPct - 50) * 0.15 - (ward.treeCanopyPct * 0.2);
+      const adjustedTempScore = Math.max(10, Math.min(100, Math.round(baseTempScore + microTempDeltaScore)));
 
       const factors = {
         temperatureScore: adjustedTempScore,
@@ -73,6 +85,9 @@ export default function App() {
 
       return {
         ...ward,
+        wardAmbientTempC,
+        wardHumidityPct,
+        wardHeatIndexC,
         currentFactors: factors,
         currentScore: score,
         currentTier: tier
@@ -82,7 +97,8 @@ export default function App() {
 
   // Selected ward object
   const selectedWard = useMemo(() => {
-    return enrichedWards.find(w => w.id === selectedWardId) || enrichedWards[0];
+    if (!selectedWardId) return null;
+    return enrichedWards.find(w => w.id === selectedWardId) || null;
   }, [enrichedWards, selectedWardId]);
 
   // Run simulation for selected ward
@@ -107,6 +123,58 @@ export default function App() {
     return { avg, tier };
   }, [enrichedWards]);
 
+  // Dynamic Telemetry for the top header capsule (tracks ward microclimate or city average)
+  const activeTelemetry = useMemo(() => {
+    const isWardMode = telemetryScope === 'ward' && Boolean(selectedWard);
+
+    if (isWardMode && selectedWard) {
+      const isSim = Boolean(simulatedResult && simulatedResult.deltaScore > 0);
+      const tempDrop = isSim ? simulatedResult.ambientTempDropC : 0;
+      const effectiveTempC = Math.round((selectedWard.wardAmbientTempC - tempDrop) * 10) / 10;
+      const effectiveHeatIndexC = Math.round((selectedWard.wardHeatIndexC - (tempDrop * 1.25)) * 10) / 10;
+      const effectiveScore = isSim ? simulatedResult.simulatedScore : selectedWard.currentScore;
+      const effectiveTier = isSim ? simulatedResult.simulatedTier : selectedWard.currentTier;
+
+      return {
+        isWardSpecific: true,
+        wardId: selectedWard.id,
+        wardName: selectedWard.name.split(' ')[0],
+        fullWardName: selectedWard.name,
+        zone: selectedWard.zone,
+        temperatureC: effectiveTempC,
+        relativeHumidityPct: selectedWard.wardHumidityPct,
+        apparentTemperatureC: effectiveHeatIndexC,
+        score: effectiveScore,
+        tier: effectiveTier,
+        isSimulated: isSim,
+        deltaScore: isSim ? simulatedResult.deltaScore : 0
+      };
+    }
+
+    // Default / City overview
+    return {
+      isWardSpecific: false,
+      wardId: null,
+      wardName: 'Pune City',
+      fullWardName: 'Pune Municipal Area',
+      zone: 'Citywide Average',
+      temperatureC: weatherData.temperatureC,
+      relativeHumidityPct: weatherData.relativeHumidityPct,
+      apparentTemperatureC: weatherData.apparentTemperatureC,
+      score: cityStats.avg,
+      tier: cityStats.tier,
+      isSimulated: false,
+      deltaScore: 0
+    };
+  }, [telemetryScope, selectedWard, simulatedResult, weatherData, cityStats]);
+
+  const handleSelectWard = (wardId) => {
+    setSelectedWardId(wardId);
+    if (wardId) {
+      setTelemetryScope('ward'); // auto-focus ward microclimate in header when clicking any ward
+    }
+  };
+
   const handleToggleWeatherMode = (liveMode) => {
     setIsLiveWeather(liveMode);
   };
@@ -124,12 +192,13 @@ export default function App() {
       
       {/* Apple Frosted Glass Header */}
       <AppleHeader
-        weatherData={weatherData}
+        telemetry={activeTelemetry}
+        telemetryScope={telemetryScope}
+        onToggleTelemetryScope={setTelemetryScope}
+        hasSelectedWard={Boolean(selectedWard)}
         isLiveWeather={isLiveWeather}
         onToggleWeatherMode={handleToggleWeatherMode}
         onOpenMethodology={() => setIsMethodologyOpen(true)}
-        cityAvgScore={cityStats.avg}
-        cityRiskTier={cityStats.tier}
       />
 
       {/* Main Workspace Body */}
@@ -178,14 +247,14 @@ export default function App() {
                 <GraphicWardMap
                   wards={enrichedWards}
                   selectedWardId={selectedWardId}
-                  onSelectWard={setSelectedWardId}
+                  onSelectWard={handleSelectWard}
                   simulatedResults={simulatedResultsMap}
                 />
               ) : (
                 <WardRiskMap
                   wards={enrichedWards}
                   selectedWardId={selectedWardId}
-                  onSelectWard={setSelectedWardId}
+                  onSelectWard={handleSelectWard}
                   simulatedResults={simulatedResultsMap}
                 />
               )}
@@ -212,7 +281,7 @@ export default function App() {
                   return (
                     <button
                       key={w.id}
-                      onClick={() => setSelectedWardId(w.id)}
+                      onClick={() => handleSelectWard(w.id)}
                       className={`p-3 rounded-squircle-sm border text-left transition-all duration-150 flex flex-col justify-between ${
                         isSelected
                           ? 'border-apple-text bg-apple-canvas shadow-sm ring-2 ring-black/5'
