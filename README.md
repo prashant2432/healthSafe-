@@ -1,4 +1,4 @@
-# 🔥 HeatWatch India
+# 🔥 HeatSafe India
 ### Hyperlocal Heat-Health Risk Intelligence Platform
 
 **Turning citywide heat warnings into neighbourhood-level insights.**
