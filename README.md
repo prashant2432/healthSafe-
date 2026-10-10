@@ -1,246 +1,114 @@
-# 🔥 HeatSafe India
-### Hyperlocal Heat-Health Risk Intelligence Platform
+🔥 HeatSafe
 
-**Turning citywide heat warnings into neighbourhood-level insights.**
+Hyperlocal heat-health risk awareness, from citywide warnings to neighbourhood-level insight.
 
-HeatWatch India is a web-based prototype designed to identify neighbourhoods that may face elevated heat-health risks by combining weather conditions, environmental indicators, and population vulnerability.
+🚧 Hackathon prototype built at SKN COE (09/10/2026). Risk scores are illustrative, some data is simulated, and nothing here is medical advice or a validated prediction.
 
-The platform aims to help communities and urban authorities understand where heat risks may be higher, why certain areas may be more vulnerable, and where preventive interventions should be prioritised.
+<!-- Add a screenshot or GIF of the app here, for example: --> <!-- ![HeatSafe dashboard](docs/screenshot.png) -->
 
-> **Project status:** Hackathon prototype. Some demonstration data may be simulated. Risk scores are illustrative and are not validated medical predictions.
+Live demo: add your Vercel/Netlify link here
 
----
+📌 The Problem
 
-## 🌍 The Problem
+Extreme heat is a growing public-health risk in India, but a citywide temperature warning doesn't tell people which neighbourhoods are more at risk, or why. Humidity, surface heating, green cover, air quality and who lives in an area (elderly people, outdoor workers) all change how dangerous a hot day is.
 
-Extreme heat is a growing public-health challenge in India. However, temperature alone does not fully describe the risk faced by people in different neighbourhoods.
+Challenge: how can we move from broad heat alerts to localised, explainable, data-informed heat-risk assessment?
 
-Factors such as humidity, land-surface heating, green cover, air quality, population vulnerability, and exposure duration can influence heat-health risk.
+💡 Our Solution
 
-Citywide heat warnings may not reveal which local areas need the most attention.
+HeatSafe is a web dashboard that combines weather data with environmental and vulnerability indicators to estimate relative heat-health risk for neighbourhoods, and explains what is driving each score.
 
-**The challenge:** How can we move from broad heat alerts to more localised, explainable, and data-informed heat-risk assessment?
+✨ Features
+🗺️ Interactive risk map with colour-coded neighbourhoods (Leaflet + OpenStreetMap)
+🌡️ Live weather (temperature, humidity) from the Open-Meteo API
+📊 Explainable scoring: see how each factor contributes to a score
+🎚️ What-if simulator: change inputs and watch the risk respond
+🛡️ Preventive suggestions: simple rule-based tips (shade, drinking water, cooling spaces, outreach to vulnerable groups)
 
-## 💡 Our Solution
+Some neighbourhood-level values (surface heating, vulnerability, air quality) are sample data for demonstration.
 
-HeatWatch India combines available environmental and demographic indicators into an interactive dashboard that estimates relative heat-health risk at the neighbourhood level.
+⚙️ How It Works
+Fetch current weather for the area.
+Load neighbourhood indicators (sample data in this prototype).
+Scale each indicator to 0 to 100.
+Combine them with a weighted formula to get a risk score and category.
+Show results on the map and dashboard, with rule-based recommendations.
+Prototype risk formula
+Risk = 0.30·T + 0.20·H + 0.20·S + 0.20·V + 0.10·A
+Symbol	Factor	Weight
+T	Temperature heat score	30%
+H	Humidity / heat-stress score	20%
+S	Land-surface heating score	20%
+V	Population vulnerability and exposure	20%
+A	Air-quality risk	10%
 
-The platform is designed to:
+These weights are design assumptions, not scientifically validated thresholds. There is no trained machine-learning model in this project; it is a transparent rule-based score so that every number can be explained.
 
-- 🌡️ Display weather conditions and heat-related indicators.
-- 🗺️ Visualise estimated risk using an interactive, colour-coded map.
-- 📊 Calculate transparent, explainable risk scores.
-- 🔍 Show factors contributing to an area's estimated risk.
-- 🎚️ Provide a what-if simulator to explore hypothetical scenarios.
-- 🛡️ Suggest preventive actions for areas that may need additional attention.
+🛠️ Tech Stack
+Tool	Purpose
+React 18	User interface
+Vite	Dev server and build tool
+Tailwind CSS	Styling
+Leaflet + OpenStreetMap	Map and base tiles
+Open-Meteo API	Weather data
+Recharts	Charts
+lucide-react	Icons
+🚀 Getting Started
 
-## ✨ Key Features
+Requirements: Node.js (LTS recommended) and Git.
 
-### 1. Interactive Heat-Risk Map
-Explore locations and view their estimated risk categories using a geographic map.
-
-### 2. Explainable Risk Scoring
-Combine normalised environmental and vulnerability indicators into a single score, with the contribution of each factor visible.
-
-### 3. Weather Integration
-Use weather API data to display temperature, humidity, and other available heat-related indicators.
-
-### 4. What-If Simulator
-Change hypothetical input values and observe how the model's estimated risk score responds.
-
-### 5. Preventive Recommendations
-Generate rule-based suggestions such as prioritising shaded public spaces, drinking-water access, cooling facilities, and outreach to vulnerable populations.
-
-### 6. Data-Informed Decision Support
-Provide a foundation for future integration of satellite observations, air-quality measurements, official population statistics, and verified local geographic data.
-
-## ⚙️ How It Works
-
-1. **Collect data:** Retrieve weather information and load available environmental, geographic, and demographic datasets.
-2. **Prepare inputs:** Convert supported indicators to documented, comparable scales.
-3. **Estimate risk:** Apply a transparent, weighted scoring model.
-4. **Visualise results:** Display scores and risk categories on the interactive map and dashboard.
-5. **Recommend action:** Apply rules to suggest preventive measures based on the estimated risk and its contributing factors.
-
-### Prototype Risk Model
-
-An initial illustrative scoring formula is:
-
-\[
-R = 0.30T + 0.20H + 0.20S + 0.20V + 0.10A
-\]
-
-Where:
-
-| Variable | Description | Weight |
-|---|---|---:|
-| T | Temperature-related heat score | 30% |
-| H | Humidity / heat-stress score | 20% |
-| S | Land-surface heating score | 20% |
-| V | Population vulnerability and exposure score | 20% |
-| A | Air-quality risk score | 10% |
-
-Each input is intended to be normalised to a scale from 0 to 100.
-
-**Important:** The formula and weights are preliminary design assumptions, not validated scientific thresholds. Input normalisation, data quality, potential overlap between factors, and model performance require further evaluation.
-
-## 🛠️ Technology Stack
-
-| Technology | Purpose |
-|---|---|
-| React | Component-based user interface |
-| JavaScript | Application logic and risk calculations |
-| Vite | Development server and build tooling |
-| Leaflet | Interactive maps |
-| OpenStreetMap | Base-map tiles |
-| Open-Meteo API | Weather data integration |
-| Recharts (optional) | Charts and data visualisation |
-
-The initial prototype can use in-app sample data. A dedicated backend or database may be added as the project evolves.
-
-## 📡 Potential Data Sources
-
-The following sources can support future development, subject to data availability, coverage, access conditions, and licensing.
-
-| Data | Potential source |
-|---|---|
-| Temperature and humidity | [Open-Meteo](https://open-meteo.com/en/docs) |
-| Indian weather observations | [India Meteorological Department](https://mausam.imd.gov.in/) |
-| Land cover and vegetation | [ISRO Bhuvan](https://bhuvan.nrsc.gov.in/) |
-| Satellite land-surface temperature | [NASA Earthdata](https://earthdata.nasa.gov/) |
-| Population statistics | [Census of India](https://censusindia.gov.in/) |
-| Air quality | [CPCB](https://cpcb.nic.in/) |
-| Geographic base maps | [OpenStreetMap](https://www.openstreetmap.org/) |
-
-Data sources may differ in spatial resolution, update frequency, and geographic coverage. Weather estimates for a city must not be presented as direct measurements for every neighbourhood.
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-Install:
-
-- [Node.js](https://nodejs.org/) — preferably an active LTS version.
-- npm, which is included with Node.js.
-- [Git](https://git-scm.com/) for version control.
-
-### Installation
-
-Clone your repository:
-
-```bash
-git clone https://github.com/YOUR-USERNAME/heatwatch-india.git
-cd heatwatch-india
-```
-
-Install dependencies:
-
-```bash
+bash
+git clone https://github.com/prashant2432/healthSafe-.git
+cd healthSafe-
 npm install
-```
-
-If you are creating the React project from scratch instead:
-
-```bash
-npm create vite@latest heatwatch-india -- --template react
-cd heatwatch-india
-npm install
-npm install leaflet react-leaflet recharts
 npm run dev
-```
 
-If your existing project already has its dependencies installed, do not recreate it. Follow its existing `package.json` and setup instructions.
+Then open the local address shown in your terminal (usually http://localhost:5173).
 
-### Run Locally
+npm install is only needed once per copy of the project, or again after package.json changes. After that, just run npm run dev.
 
-```bash
-npm run dev
-```
+Other commands
+Command	What it does
+npm run dev	Start the development server
+npm run build	Create a production build in dist/
+npm run preview	Preview the production build locally
+Troubleshooting
+Cannot find module ... vite: dependencies aren't installed. Run npm install in the folder that contains package.json.
+Opened from a downloaded zip? A zip won't include node_modules. Use git clone instead, or run npm install after extracting.
+📡 Data Sources
+Data	Source	Status
+Temperature, humidity	Open-Meteo	Used
+Neighbourhood indicators	Sample data in the app	Simulated
+Land-surface temperature	NASA Earthdata	Future
+Air quality	CPCB	Future
+Population	Census of India	Future
+Heat-health reference	CDC/ATSDR Heat & Health Index	Reference idea
 
-Open the local URL displayed in your terminal, typically:
+Weather from a grid or city point is not a direct measurement for every neighbourhood.
 
-```text
-http://localhost:5173/
-```
+⚠️ Limitations
+Prototype for demonstration only; scores are relative and illustrative.
+Neighbourhood data is partly simulated and boundaries are approximate.
+The formula has not been clinically or epidemiologically validated.
+Recommendations are general tips, not medical advice.
+Do not use this for emergency response, clinical decisions, or official public-health alerts.
+🔮 Future Work
+Replace sample data with verified datasets (satellite land-surface temperature, official ward boundaries, air-quality feeds).
+Validate the scoring against historical heat-illness data.
+Add forecasts and alerts.
+Support more cities and languages.
+👥 Team
 
-### Build for Production
+Team healthX4 (Hackathon problem statement HC-04: Hyperlocal heat health risk prediction)
 
-```bash
-npm run build
-```
+Venkatesh Jadhav (Team Leader)
+Prashantjit Dandge
+Gauri Ugalmugale
+Amruta Chavan
+📄 License and Attribution
 
-To preview the production build locally:
+Map data © OpenStreetMap contributors. Weather data from Open-Meteo. Check each data provider's terms before redistributing or deploying.
 
-```bash
-npm run preview
-```
+Add a LICENSE file (for example MIT) to state how the code can be reused.
 
-## 📁 Suggested Project Structure
-
-```text
-heatwatch-india/
-├── public/
-│   └── images/
-├── src/
-│   ├── components/
-│   │   ├── Header.jsx
-│   │   ├── RiskMap.jsx
-│   │   ├── RiskCard.jsx
-│   │   └── Simulator.jsx
-│   ├── data/
-│   │   └── neighbourhoods.js
-│   ├── utils/
-│   │   └── riskCalculator.js
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── index.html
-├── package.json
-└── README.md
-```
-
-This is a suggested structure; the actual files may differ depending on the implementation.
-
-## 🧪 Current Scope and Limitations
-
-- The initial release is a prototype intended for demonstration and experimentation.
-- Some neighbourhood-level attributes and statistics may be simulated.
-- Weather API values may represent model-grid estimates rather than local sensor readings.
-- Official neighbourhood boundaries and reliable local datasets may not be available for every variable.
-- The initial scoring formula has not been clinically or epidemiologically validated.
-- Recommendations are general preventive suggestions, not medical advice.
-
-HeatWatch India should not be used as the sole basis for emergency response, clinical decisions, or official public-health alerts.
-
-## 🔮 Future Improvements
-
-- Integrate verified, regularly updated Indian weather and air-quality datasets.
-- Incorporate satellite-derived land-surface temperature and vegetation indicators.
-- Add official ward boundaries and appropriately resolved population data.
-- Develop and validate a predictive model using suitable historical data and health outcomes.
-- Add time-series heat-risk forecasts and alerts.
-- Evaluate model performance, uncertainty, fairness, and geographic coverage.
-- Improve accessibility and support additional Indian cities and languages.
-
-## 🤝 Contributing
-
-Contributions, ideas, and feedback are welcome.
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Make and test your changes.
-4. Submit a pull request describing your contribution.
-
-## 📄 Data, Attribution and Licensing
-
-Review the licensing and attribution requirements of each dataset, API, and map provider before redistribution or deployment. Follow OpenStreetMap's attribution requirements when displaying its map data.
-
-Add a project-specific `LICENSE` file once you decide how the source code may be reused.
-
-## 👥 Acknowledgements
-
-Built as a hackathon prototype exploring how environmental data and transparent analytics could support more localised heat-health risk awareness in India.
-
----
-
-**HeatWatch India — Towards cooler, safer, and more resilient communities.**
+Content
