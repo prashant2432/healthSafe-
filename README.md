@@ -111,7 +111,7 @@ Test targeted cooling policies before deploying municipal capital:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/prashant2432/healthSafe-
+   git clone https://github.com/prashant2432/heatSafe-
    cd heatsafe-
    ```
 
