@@ -5,6 +5,7 @@ import { WardRiskMap } from './components/WardRiskMap';
 import { WardDetailPanel } from './components/WardDetailPanel';
 import { WhatIfSimulator } from './components/WhatIfSimulator';
 import { MethodologyModal } from './components/MethodologyModal';
+import { EmergencyProtocolModal } from './components/EmergencyProtocolModal';
 import { PUNE_WARDS } from './data/puneWards';
 import { 
   calculateRiskScore, 
@@ -27,6 +28,7 @@ export default function App() {
   const [isLoadingWeather, setIsLoadingWeather] = useState(true);
   const [interventions, setInterventions] = useState({ coolRoofsPct: 0, treeCanopyPct: 0 });
   const [isMethodologyOpen, setIsMethodologyOpen] = useState(false);
+  const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
 
   // Load weather on mount & when toggling
   useEffect(() => {
@@ -199,6 +201,7 @@ export default function App() {
         isLiveWeather={isLiveWeather}
         onToggleWeatherMode={handleToggleWeatherMode}
         onOpenMethodology={() => setIsMethodologyOpen(true)}
+        onOpenEmergencyModal={() => setIsEmergencyModalOpen(true)}
       />
 
       {/* Main Workspace Body */}
@@ -331,6 +334,7 @@ export default function App() {
                 <WardDetailPanel
                   ward={selectedWard}
                   simulatedResult={simulatedResult}
+                  onOpenEmergencyModal={() => setIsEmergencyModalOpen(true)}
                 />
 
                 {/* What-If Simulator */}
@@ -373,6 +377,13 @@ export default function App() {
       <MethodologyModal
         isOpen={isMethodologyOpen}
         onClose={() => setIsMethodologyOpen(false)}
+      />
+
+      {/* Emergency First-Aid & Protocol Modal */}
+      <EmergencyProtocolModal
+        isOpen={isEmergencyModalOpen}
+        onClose={() => setIsEmergencyModalOpen(false)}
+        activeWard={selectedWard}
       />
 
     </div>
