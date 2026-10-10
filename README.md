@@ -144,7 +144,7 @@ npm run preview
 ## 📂 Project Structure
 
 ```
-heatsafe-pune/
+heatSafe-/
 ├── public/                  # Static assets
 ├── src/
 │   ├── components/
@@ -181,7 +181,7 @@ node scratch/test_risk_engine.js
 
 ## 📜 Scientific Disclaimer
 
-*HeatSafe Pune is a prototype decision-support tool created for demonstration and planning purposes. The scoring formula weights and ward-level attributes reflect calibrated baseline assumptions rather than validated epidemiological thresholds. Real-time atmospheric observations are powered by Open-Meteo.*
+*HeatSafe is a prototype decision-support tool created for demonstration and planning purposes. The scoring formula weights and ward-level attributes reflect calibrated baseline assumptions rather than validated epidemiological thresholds. Real-time atmospheric observations are powered by Open-Meteo.*
 
 ---
 
