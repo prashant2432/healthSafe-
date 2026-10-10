@@ -30,8 +30,11 @@ export const PUNE_WARDS = [
     treeCanopyPct: 6.8,
     imperviousPct: 88.5,
     elderlyPct: 18.4,
+    childrenPct: 11.4,
+    outdoorLaborPct: 26.0,
     slumClusterCount: 14,
     historicalSummerMaxC: 42.6,
+    nearestHospital: "Kamala Nehru Hospital (Mangalwar Peth) & Sassoon General Hospital",
     baseline: {
       temperatureScore: 84,   // T (30%)
       humidityScore: 72,      // H (20%)
@@ -42,6 +45,34 @@ export const PUNE_WARDS = [
     primaryDriver: "High impervious surface density (88.5%) and critically low tree canopy (6.8%) create an intense thermal trap in historic street canyons.",
     coolRoofPotentialAreaM2: 185000,
     treePlantingSpots: 420,
+    vulnerableDemographics: {
+      seniors: {
+        share: "18.4%",
+        riskLevel: "Critical",
+        riskColor: "#FF3B30",
+        physiologicalEffect: "Blunted thirst reflex & compromised cardiovascular reserve; high prevalence of antihypertensive/diuretic medications that inhibit sweating and accelerate acute dehydration.",
+        precautions: "Keep in ground-floor ventilated rooms; scheduled hydration check every 60 mins; avoid rooftop/tin rooms between 11 AM - 5 PM."
+      },
+      children: {
+        share: "11.4%",
+        riskLevel: "High",
+        riskColor: "#FF5A36",
+        physiologicalEffect: "Body temperature rises 3-5x faster than adults due to high surface-area-to-mass ratio; underdeveloped sweat glands produce less evaporative cooling.",
+        precautions: "Strict playground curfew between 11 AM - 4 PM; hydrate with lemon/electrolyte water; never leave unattended in unventilated rooms."
+      },
+      outdoorWorkers: {
+        share: "26.0%",
+        riskLevel: "Critical",
+        riskColor: "#FF3B30",
+        physiologicalEffect: "Market porters, street hawkers & delivery handlers working under direct solar radiation and radiant tin-roof heat traps without shade buffers.",
+        precautions: "Mandatory 15-min rest in shaded PMC chhabils every hour; oral rehydration salts (ORS); avoid solitary heavy lifting during peak noon."
+      }
+    },
+    environmentalHazards: {
+      hazardHeadline: "Acute Street-Canyon Thermal Radiance & Heat Trapping",
+      heatTrapMechanism: "Narrow historic gaothan alleys lined with tin and asbestos roofs trap radiant energy. Concrete walls store heat through the day and re-radiate it late into the night, depriving residents of nocturnal recovery.",
+      airPollutionInteraction: "Congested commercial corridors trap vehicle exhaust (PM2.5, NOx), creating a toxic heat-pollution cocktail that strains cardiovascular and respiratory systems."
+    },
     playbook: [
       {
         title: "PMC Emergency Cool Roof Mission",
@@ -91,8 +122,11 @@ export const PUNE_WARDS = [
     treeCanopyPct: 11.2,
     imperviousPct: 79.0,
     elderlyPct: 11.8,
+    childrenPct: 15.2,
+    outdoorLaborPct: 34.0,
     slumClusterCount: 22,
     historicalSummerMaxC: 43.1,
+    nearestHospital: "Noble Hospital (Hadapsar) & PMC Magarpatta Health Center",
     baseline: {
       temperatureScore: 86,
       humidityScore: 68,
@@ -103,6 +137,34 @@ export const PUNE_WARDS = [
     primaryDriver: "Industrial thermal retention combined with elevated particulate pollution (PM2.5) compounds heat exhaustion for outdoor factory & logistics workers.",
     coolRoofPotentialAreaM2: 320000,
     treePlantingSpots: 950,
+    vulnerableDemographics: {
+      seniors: {
+        share: "11.8%",
+        riskLevel: "High",
+        riskColor: "#FF5A36",
+        physiologicalEffect: "High background particulate pollution (PM2.5) combined with intense heat triggers acute coronary spasms and severe respiratory distress in elderly residents.",
+        precautions: "Keep indoors with air filtration or wet cloth barriers; avoid early afternoon walks; ensure continuous electrolyte intake."
+      },
+      children: {
+        share: "15.2%",
+        riskLevel: "Critical",
+        riskColor: "#FF3B30",
+        physiologicalEffect: "Dense informal settlement clusters with non-insulated tin roofs where indoor temperatures exceed 44°C; children suffer rapid heat syncope and electrolyte imbalance.",
+        precautions: "Provide access to shaded community halls during 12 PM - 4 PM; suspend outdoor school sports; monitor for fever, dark urine, and lethargy."
+      },
+      outdoorWorkers: {
+        share: "34.0%",
+        riskLevel: "Critical",
+        riskColor: "#FF3B30",
+        physiologicalEffect: "Industrial dock workers, truck loaders, and masonry crews working alongside hot metal machinery and radiant asphalt; severe heat stroke hazard.",
+        precautions: "Enforce mandatory work pause between 12:30 PM - 3:30 PM; supply cold ORS water tankers at work sites; pair workers into buddy safety systems."
+      }
+    },
+    environmentalHazards: {
+      hazardHeadline: "Industrial Heat Retention & Toxic PM2.5 Synergies",
+      heatTrapMechanism: "Heavy concrete industrial floors, metal warehouses, and wide asphalt roadways store massive thermal mass with only 11.2% tree canopy to provide shade.",
+      airPollutionInteraction: "PM2.5 concentrations exceeding 85 µg/m³ along Solapur corridor restrict oxygenation while the heart is already pumping at double capacity to cool the body."
+    },
     playbook: [
       {
         title: "Outdoor Industrial Shift Curfew",
@@ -151,8 +213,11 @@ export const PUNE_WARDS = [
     treeCanopyPct: 22.4,
     imperviousPct: 68.0,
     elderlyPct: 14.2,
+    childrenPct: 10.5,
+    outdoorLaborPct: 18.0,
     slumClusterCount: 8,
     historicalSummerMaxC: 41.5,
+    nearestHospital: "Sassoon General Hospital (Near Pune Station) & COEP Health Clinic",
     baseline: {
       temperatureScore: 72,
       humidityScore: 60,
@@ -163,6 +228,34 @@ export const PUNE_WARDS = [
     primaryDriver: "Heavy asphalt heat from central transit terminus and high commuter volumes, partially buffered by institutional greenery at Agricultural College & COEP.",
     coolRoofPotentialAreaM2: 140000,
     treePlantingSpots: 520,
+    vulnerableDemographics: {
+      seniors: {
+        share: "14.2%",
+        riskLevel: "Moderate-High",
+        riskColor: "#FF9500",
+        physiologicalEffect: "Transit commuters and elderly citizens visiting civic offices face heat fatigue and sudden blood pressure drops while waiting at hot bus stops.",
+        precautions: "Utilize air-conditioned civic cooling spaces at metro stations and civic auditoriums; avoid travel between 12:30 PM - 3:30 PM."
+      },
+      children: {
+        share: "10.5%",
+        riskLevel: "Moderate",
+        riskColor: "#FF9500",
+        physiologicalEffect: "School commuters exposed to high asphalt surface radiation and engine exhaust during midday transit returns.",
+        precautions: "Ensure school transit has shaded windows and water bottles; avoid prolonged walking on sun-baked footpaths."
+      },
+      outdoorWorkers: {
+        share: "18.0%",
+        riskLevel: "High",
+        riskColor: "#FF5A36",
+        physiologicalEffect: "Traffic police personnel, auto-rickshaw drivers, and transit staff subjected to continuous engine heat and sun exposure.",
+        precautions: "Provide electrolyte sachets and rotational shift breaks in cooled traffic kiosks every 45 minutes."
+      }
+    },
+    environmentalHazards: {
+      hazardHeadline: "Asphalt Corridor Heat Radiance & Transit Congestion",
+      heatTrapMechanism: "Vast asphalt corridors across the ST bus stand, railway hub, and metro interchanges absorb intense solar heat, radiating surface temperatures of up to 47°C.",
+      airPollutionInteraction: "Vehicular exhaust and engine heat combine with high ambient temperatures to generate ground-level ozone hotspots."
+    },
     playbook: [
       {
         title: "PMPML Transit Bus Shelter Cooling",
@@ -206,8 +299,11 @@ export const PUNE_WARDS = [
     treeCanopyPct: 24.8,
     imperviousPct: 62.5,
     elderlyPct: 17.1,
+    childrenPct: 8.4,
+    outdoorLaborPct: 12.0,
     slumClusterCount: 5,
     historicalSummerMaxC: 40.8,
+    nearestHospital: "Sahyadri Hospital (Kothrud) & Joshi Hospital",
     baseline: {
       temperatureScore: 65,
       humidityScore: 58,
@@ -218,6 +314,34 @@ export const PUNE_WARDS = [
     primaryDriver: "Moderate heat vulnerability characterized by aging residential societies and high senior demographic, moderated by western hill breezes.",
     coolRoofPotentialAreaM2: 210000,
     treePlantingSpots: 640,
+    vulnerableDemographics: {
+      seniors: {
+        share: "17.1%",
+        riskLevel: "High",
+        riskColor: "#FF5A36",
+        physiologicalEffect: "High proportion of seniors living alone in top-floor society flats. Concrete roof slabs conduct heat downward, causing prolonged nocturnal heat stress and insomnia.",
+        precautions: "Apply terrace reflective mats or cool roof coatings; organize society buddy check-ins for solo seniors; drink water at scheduled intervals."
+      },
+      children: {
+        share: "8.4%",
+        riskLevel: "Moderate",
+        riskColor: "#FF9500",
+        physiologicalEffect: "Children playing outdoors in residential courtyards during afternoon heat risk heat cramps and dizziness.",
+        precautions: "Restrict outdoor cycling and sports to post-5:30 PM; ensure pre-hydration with coconut water or lime water."
+      },
+      outdoorWorkers: {
+        share: "12.0%",
+        riskLevel: "Moderate-High",
+        riskColor: "#FF9500",
+        physiologicalEffect: "Residential security guards in non-insulated tin cabins and maintenance gardeners.",
+        precautions: "Societies must provide shaded, fan-ventilated security cabins and cold water jars."
+      }
+    },
+    environmentalHazards: {
+      hazardHeadline: "Terrace Slab Downward Thermal Conduction",
+      heatTrapMechanism: "Concrete terrace slabs of 1980s–1990s housing societies absorb solar radiation all afternoon and conduct heat directly into top-floor flats through the night.",
+      airPollutionInteraction: "Relatively clean air buffered by Vetal Hill reduces respiratory compounding, making indoor trapped heat the primary clinical concern."
+    },
     playbook: [
       {
         title: "Housing Society Cool Roof Subsidy",
@@ -261,8 +385,11 @@ export const PUNE_WARDS = [
     treeCanopyPct: 16.5,
     imperviousPct: 76.2,
     elderlyPct: 8.5,
+    childrenPct: 12.8,
+    outdoorLaborPct: 16.0,
     slumClusterCount: 7,
     historicalSummerMaxC: 41.8,
+    nearestHospital: "Symbiosis University Hospital & Inlaks & Budhrani Hospital",
     baseline: {
       temperatureScore: 70,
       humidityScore: 59,
@@ -273,6 +400,34 @@ export const PUNE_WARDS = [
     primaryDriver: "Glass facades and wide concrete parking plazas generate micro-urban heat pockets, counterbalanced by modern building insulation and low baseline social vulnerability.",
     coolRoofPotentialAreaM2: 280000,
     treePlantingSpots: 780,
+    vulnerableDemographics: {
+      seniors: {
+        share: "8.5%",
+        riskLevel: "Moderate",
+        riskColor: "#FF9500",
+        physiologicalEffect: "Lower overall senior percentage, but elderly individuals moving between heavily air-conditioned interiors and 44°C outdoor plazas suffer thermal vascular shock.",
+        precautions: "Allow gradual cooling adjustments; avoid sudden transitions between extreme cold and extreme outdoor heat."
+      },
+      children: {
+        share: "12.8%",
+        riskLevel: "Moderate-High",
+        riskColor: "#FF9500",
+        physiologicalEffect: "Synthetic turf play areas and rubberized flooring in private school complexes reach temperatures above 55°C, creating rapid contact burn and dehydration hazards.",
+        precautions: "Prohibit synthetic turf play between 10:30 AM - 4:30 PM; maintain clean electrolyte drinking stations in schools."
+      },
+      outdoorWorkers: {
+        share: "16.0%",
+        riskLevel: "High",
+        riskColor: "#FF5A36",
+        physiologicalEffect: "Gig delivery riders spending 6–8 hours daily on reflective tarmac under direct solar radiation; acute risk of heat exhaustion and cramps.",
+        precautions: "Platform companies must deploy shaded rest pods; riders must carry water bottles with hydration alarms."
+      }
+    },
+    environmentalHazards: {
+      hazardHeadline: "Glass Curtain Reflection & Pavement Plazas",
+      heatTrapMechanism: "Curtain glass facades on IT towers reflect solar radiation onto surrounding pedestrian plazas, elevating local radiant temperatures above ambient levels.",
+      airPollutionInteraction: "Airport corridor traffic and ongoing construction dust generate moderate particulate haze that traps heat in the lower boundary layer."
+    },
     playbook: [
       {
         title: "Commercial Surface Greening Mandate",
@@ -315,8 +470,11 @@ export const PUNE_WARDS = [
     treeCanopyPct: 38.6,
     imperviousPct: 42.0,
     elderlyPct: 15.2,
+    childrenPct: 9.2,
+    outdoorLaborPct: 8.0,
     slumClusterCount: 2,
     historicalSummerMaxC: 38.9,
+    nearestHospital: "Inlaks and Budhrani Hospital & Jehangir Hospital (Near Pune Station)",
     baseline: {
       temperatureScore: 52,
       humidityScore: 55,
@@ -327,6 +485,34 @@ export const PUNE_WARDS = [
     primaryDriver: "Extensive mature banyan and rain tree canopy (38.6%) combined with Mula-Mutha river buffer creates Pune's most resilient microclimate buffer against heatwaves.",
     coolRoofPotentialAreaM2: 95000,
     treePlantingSpots: 180,
+    vulnerableDemographics: {
+      seniors: {
+        share: "15.2%",
+        riskLevel: "Low-Moderate",
+        riskColor: "#34C759",
+        physiologicalEffect: "High tree canopy buffering keeps ambient air 2.5°C cooler, providing protective natural shade for elderly residents during morning and evening walks.",
+        precautions: "Maintain regular hydration; complete outdoor walks before 9:30 AM; monitor on days with high riverbank humidity."
+      },
+      children: {
+        share: "9.2%",
+        riskLevel: "Low-Moderate",
+        riskColor: "#34C759",
+        physiologicalEffect: "Natural tree canopies block direct UV and excessive solar radiation, reducing acute thermal strain on young children.",
+        precautions: "Encourage outdoor activities in shaded park zones; keep well hydrated with natural fluids."
+      },
+      outdoorWorkers: {
+        share: "8.0%",
+        riskLevel: "Moderate",
+        riskColor: "#FF9500",
+        physiologicalEffect: "Gardeners, sanitary sweepers, and private security staff benefit from continuous shade but require hydration support during peak humidity.",
+        precautions: "Provide insulated cold water bottles; schedule heavier outdoor tasks for early morning hours."
+      }
+    },
+    environmentalHazards: {
+      hazardHeadline: "Elevated Relative Humidity & Wet-Bulb Load Near Riverbank",
+      heatTrapMechanism: "While tree shade blocks radiant heat, proximity to the Mula-Mutha river elevates localized humidity, slightly dampening sweat evaporation during calm wind hours.",
+      airPollutionInteraction: "Foliage filters over 45% of airborne particulates, making this Pune's cleanest and most thermally resilient urban zone."
+    },
     playbook: [
       {
         title: "Tree Canopy Preservation Ordinance",

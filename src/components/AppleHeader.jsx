@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flame, CloudSun, Radio, Info, ShieldAlert, Droplets, MapPin, Globe } from 'lucide-react';
+import { Flame, CloudSun, Radio, Info, ShieldAlert, Droplets, MapPin, Globe, HeartPulse } from 'lucide-react';
 
 export function AppleHeader({
   telemetry,
@@ -8,7 +8,8 @@ export function AppleHeader({
   hasSelectedWard,
   isLiveWeather,
   onToggleWeatherMode,
-  onOpenMethodology
+  onOpenMethodology,
+  onOpenEmergencyModal
 }) {
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/85 border-b border-black/[0.06] transition-all">
@@ -155,6 +156,18 @@ export function AppleHeader({
               <span className="sm:hidden">Peak</span>
             </button>
           </div>
+
+          {/* Emergency First-Aid Quick Action Button (Square-round) */}
+          <button
+            type="button"
+            onClick={onOpenEmergencyModal}
+            title="Heat Distress & Heat Stroke Emergency Action Protocol"
+            className="px-2.5 sm:px-3 py-1.5 rounded-squircle-sm bg-apple-crimsonLight text-apple-crimson border border-apple-crimson/25 hover:bg-apple-crimson hover:text-white transition-all text-[12px] font-bold flex items-center gap-1.5 shadow-apple-subtle"
+          >
+            <HeartPulse className="w-3.5 h-3.5 animate-pulse" />
+            <span className="hidden sm:inline">Heat First Aid</span>
+            <span className="sm:hidden">108</span>
+          </button>
 
           {/* Methodology Info button (square-round) */}
           <button
